@@ -249,7 +249,8 @@ function updateMeter(){
 function submitPackage(){
   if(!player.base){toast('Select a base first');return;}
   const sc=computeScore();
-  attempts.push({name:player.name,persona:player.persona.name,
+  attempts.push({name: player.name,
+  roll: player.roll,persona:player.persona.name,
                  score:sc.total,stars:sc.stars,
                  date:new Date().toLocaleString('en-GB')});
   localStorage.setItem('zenoAttempts',JSON.stringify(attempts));
@@ -281,7 +282,9 @@ function leader(){
    <div class="max-w-3xl mx-auto mt-6 bg-white p-6 rounded shadow">
      <table class="w-full text-sm border"><thead>
        <tr class="bg-slate-100 text-slate-800">
-         <th class="border px-1">#</th><th class="border px-2">Name</th>
+         <th class="border px-1">#</th>
+         <th class="border px-2">Name</th>
+         <th class="border px-2">Roll/Group No.</th>
          <th class="border px-2">Persona</th>
          <th class="border px-2">Score</th>
          <th class="border px-2">Stars</th>
@@ -291,22 +294,23 @@ function leader(){
          <tr class="odd:bg-slate-50">
            <td class="border text-center">${i+1}</td>
            <td class="border px-2">${r.name}</td>
+           <td class="border px-2">${r.roll || ''}</td>
            <td class="border px-2">${r.persona}</td>
            <td class="border text-center">${r.score}</td>
            <td class="border text-center text-sky-700">${'★'.repeat(r.stars)}</td>
            <td class="border px-1 text-xs">${r.date}</td>
          </tr>`).join('')}
      </tbody></table>
-     <button class="mt-4 bg-gray-600 hover:bg-gray-700 text-white px-3 py-1 rounded"
-             onclick="localStorage.removeItem('zenoAttempts');location.reload()">
-       Clear All
-     </button>
-
-     <button class="bg-sky-600 hover:bg-sky-700 text-white px-3 py-1 rounded"
+     <div class="mt-4 flex gap-2">
+       <button class="bg-gray-600 hover:bg-gray-700 text-white px-3 py-1 rounded"
+               onclick="localStorage.removeItem('zenoAttempts');location.reload()">
+         Clear All
+       </button>
+       <button class="bg-sky-600 hover:bg-sky-700 text-white px-3 py-1 rounded"
                onclick="location.hash='#persona'">
          Play Again
        </button>
-     
+     </div>
    </div>`;
 }
 
@@ -363,9 +367,10 @@ function scoreFeedback(total) {
   if (total <= 3) return "Did you miss key matching features?";
   if (total <= 6) return "You’re getting there! Improve budget or feature fit.";
   if (total <= 9) return "You are almost there. Check budget or fine-tune fit.";
-  return "You are a legend! Challenge yourself with another persona.";
+  return "You are a legend! Ready to challenge yourself with other personas?";
 }
 </script>
 
 </body>
 </html>
+
