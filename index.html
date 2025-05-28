@@ -118,7 +118,7 @@ function persona(){
       <div class="bg-white p-4 rounded shadow cursor-pointer hover:ring hover:ring-sky-400 flex justify-between items-center"
            onclick="selectPersona('${p.id}')">
            <span>${p.name}</span>
-           <button class="text-xs text-blue-500 underline" onclick="event.stopPropagation(); showTooltip('${p.name.split('–')[0].trim()}')">info</button>
+           <button class="text-xs text-Indigo-900 underline" onclick="event.stopPropagation(); showTooltip('${p.name.split('–')[0].trim()}')">info</button>
       </div>`).join('')}
    </div>`;
 }
@@ -301,6 +301,12 @@ function leader(){
              onclick="localStorage.removeItem('zenoAttempts');location.reload()">
        Clear All
      </button>
+
+     <button class="bg-sky-600 hover:bg-sky-700 text-white px-3 py-1 rounded"
+               onclick="location.hash='#persona'">
+         Play Again
+       </button>
+     
    </div>`;
 }
 
